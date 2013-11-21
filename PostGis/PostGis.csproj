@@ -308,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\iD\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis", "PostGis\PostGis.csproj", "{AC1A1875-F840-4EED-AA2C-8010923C6820}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Web", "PostGis\PostGis.Web.csproj", "{AC1A1875-F840-4EED-AA2C-8010923C6820}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Tests", "PostGis.Tests\PostGis.Tests.csproj", "{61E1B45B-069C-41AF-BD57-D77F33535BC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Web.Tests", "PostGis.Tests\PostGis.Web.Tests.csproj", "{61E1B45B-069C-41AF-BD57-D77F33535BC9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

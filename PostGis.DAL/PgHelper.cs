@@ -94,7 +94,7 @@ namespace PostGis.DAL
                 // If the current array value derives from IDbDataParameter, then assign its Value property 
                 if (parameterValues[i] is IDbDataParameter)
                 {
-                    IDbDataParameter paramInstance = (IDbDataParameter)parameterValues[i];
+                    IDbDataParameter paramInstance = (IDbDataParameter) parameterValues[i];
                     if (paramInstance.Value == null)
                     {
                         commandParameters[i].Value = DBNull.Value;
@@ -125,7 +125,9 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名或都T-SQL命令文本</param> 
         /// <param name="commandParameters">和命令相关联的NpgsqlParameter参数数组,如果没有参数为'null'</param> 
         /// <param name="mustCloseConnection"><c>true</c> 如果连接是打开的,则为true,其它情况下为false.</param> 
-        private static void PrepareCommand(NpgsqlCommand command, NpgsqlConnection connection, NpgsqlTransaction transaction, CommandType commandType, string commandText, NpgsqlParameter[] commandParameters, out bool mustCloseConnection)
+        private static void PrepareCommand(NpgsqlCommand command, NpgsqlConnection connection,
+            NpgsqlTransaction transaction, CommandType commandType, string commandText,
+            NpgsqlParameter[] commandParameters, out bool mustCloseConnection)
         {
             if (command == null) throw new ArgumentNullException("command");
             if (commandText == null || commandText.Length == 0) throw new ArgumentNullException("commandText");
@@ -150,7 +152,9 @@ namespace PostGis.DAL
             // 分配事务 
             if (transaction != null)
             {
-                if (transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+                if (transaction.Connection == null)
+                    throw new ArgumentException(
+                        "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
                 command.Transaction = transaction;
             }
 
@@ -168,6 +172,7 @@ namespace PostGis.DAL
         #endregion 私有构造函数和方法结束
 
         #region 数据库连接
+
         /// <summary> 
         /// 一个有效的数据库连接字符串 
         /// </summary> 
@@ -176,6 +181,7 @@ namespace PostGis.DAL
         {
             return ConfigurationManager.ConnectionStrings["ConStr"].ConnectionString;
         }
+
         /// <summary> 
         /// 一个有效的数据库连接对象 
         /// </summary> 
@@ -185,6 +191,7 @@ namespace PostGis.DAL
             NpgsqlConnection Connection = new NpgsqlConnection(GetConnSting());
             return Connection;
         }
+
         #endregion
 
         #region ExecuteNonQuery命令
@@ -202,7 +209,7 @@ namespace PostGis.DAL
         /// <returns>返回命令影响的行数</returns> 
         public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText)
         {
-            return ExecuteNonQuery(connectionString, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteNonQuery(connectionString, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -217,9 +224,11 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或SQL语句</param> 
         /// <param name="commandParameters">NpgsqlParameter参数数组</param> 
         /// <returns>返回命令影响的行数</returns> 
-        public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -244,7 +253,8 @@ namespace PostGis.DAL
         /// <returns>返回受影响的行数</returns> 
         public static int ExecuteNonQuery(string connectionString, string spName, params object[] parameterValues)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果存在参数值 
@@ -278,7 +288,7 @@ namespace PostGis.DAL
         /// <returns>返回影响的行数</returns> 
         public static int ExecuteNonQuery(NpgsqlConnection connection, CommandType commandType, string commandText)
         {
-            return ExecuteNonQuery(connection, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteNonQuery(connection, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -293,14 +303,16 @@ namespace PostGis.DAL
         /// <param name="commandText">T存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamter参数数组</param> 
         /// <returns>返回影响的行数</returns> 
-        public static int ExecuteNonQuery(NpgsqlConnection connection, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static int ExecuteNonQuery(NpgsqlConnection connection, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
             // 创建NpgsqlCommand命令,并进行预处理 
             NpgsqlCommand cmd = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, connection, (NpgsqlTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, connection, (NpgsqlTransaction) null, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // Finally, execute the command 
             int retval = cmd.ExecuteNonQuery();
@@ -359,7 +371,7 @@ namespace PostGis.DAL
         /// <returns>返回影响的行数/returns> 
         public static int ExecuteNonQuery(NpgsqlTransaction transaction, CommandType commandType, string commandText)
         {
-            return ExecuteNonQuery(transaction, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteNonQuery(transaction, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -374,15 +386,19 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamter参数数组</param> 
         /// <returns>返回影响的行数</returns> 
-        public static int ExecuteNonQuery(NpgsqlTransaction transaction, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static int ExecuteNonQuery(NpgsqlTransaction transaction, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
 
             // 预处理 
             NpgsqlCommand cmd = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 执行 
             int retval = cmd.ExecuteNonQuery();
@@ -407,14 +423,17 @@ namespace PostGis.DAL
         public static int ExecuteNonQuery(NpgsqlTransaction transaction, string spName, params object[] parameterValues)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果有参数值 
             if ((parameterValues != null) && (parameterValues.Length > 0))
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 给存储过程参数赋值 
                 AssignParameterValues(commandParameters, parameterValues);
@@ -446,7 +465,7 @@ namespace PostGis.DAL
         /// <returns>返回一个包含结果集的DataSet</returns> 
         public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText)
         {
-            return ExecuteDataset(connectionString, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteDataset(connectionString, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -461,9 +480,11 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamters参数数组</param> 
         /// <returns>返回一个包含结果集的DataSet</returns> 
-        public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static DataSet ExecuteDataset(string connectionString, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
 
             // 创建并打开数据库连接对象,操作完成释放对象. 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -489,7 +510,8 @@ namespace PostGis.DAL
         /// <returns>返回一个包含结果集的DataSet</returns> 
         public static DataSet ExecuteDataset(string connectionString, string spName, params object[] parameterValues)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             if ((parameterValues != null) && (parameterValues.Length > 0))
@@ -521,7 +543,7 @@ namespace PostGis.DAL
         /// <returns>返回一个包含结果集的DataSet</returns> 
         public static DataSet ExecuteDataset(NpgsqlConnection connection, CommandType commandType, string commandText)
         {
-            return ExecuteDataset(connection, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteDataset(connection, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -536,14 +558,16 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamter参数数组</param> 
         /// <returns>返回一个包含结果集的DataSet</returns> 
-        public static DataSet ExecuteDataset(NpgsqlConnection connection, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static DataSet ExecuteDataset(NpgsqlConnection connection, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
             // 预处理 
             NpgsqlCommand cmd = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, connection, (NpgsqlTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, connection, (NpgsqlTransaction) null, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 创建NpgsqlDataAdapter和DataSet. 
             using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
@@ -608,7 +632,7 @@ namespace PostGis.DAL
         /// <returns>返回一个包含结果集的DataSet</returns> 
         public static DataSet ExecuteDataset(NpgsqlTransaction transaction, CommandType commandType, string commandText)
         {
-            return ExecuteDataset(transaction, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteDataset(transaction, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -623,15 +647,19 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamter参数数组</param> 
         /// <returns>返回一个包含结果集的DataSet</returns> 
-        public static DataSet ExecuteDataset(NpgsqlTransaction transaction, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static DataSet ExecuteDataset(NpgsqlTransaction transaction, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
 
             // 预处理 
             NpgsqlCommand cmd = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 创建 DataAdapter & DataSet 
             using (NpgsqlDataAdapter da = new NpgsqlDataAdapter(cmd))
@@ -655,16 +683,20 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名</param> 
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param> 
         /// <returns>返回一个包含结果集的DataSet</returns> 
-        public static DataSet ExecuteDataset(NpgsqlTransaction transaction, string spName, params object[] parameterValues)
+        public static DataSet ExecuteDataset(NpgsqlTransaction transaction, string spName,
+            params object[] parameterValues)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             if ((parameterValues != null) && (parameterValues.Length > 0))
             {
                 // 从缓存中加载存储过程参数 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 给存储过程参数分配值 
                 AssignParameterValues(commandParameters, parameterValues);
@@ -688,6 +720,7 @@ namespace PostGis.DAL
         {
             /// <summary>由SqlHelper提供连接</summary> 
             Internal,
+
             /// <summary>由调用者提供连接</summary> 
             External
         }
@@ -706,7 +739,9 @@ namespace PostGis.DAL
         /// <param name="commandParameters">NpgsqlParameters参数数组,如果没有参数则为'null'</param> 
         /// <param name="connectionOwnership">标识数据库连接对象是由调用者提供还是由SqlHelper提供</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        private static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, NpgsqlTransaction transaction, CommandType commandType, string commandText, NpgsqlParameter[] commandParameters, NpgsqlConnectionOwnership connectionOwnership)
+        private static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, NpgsqlTransaction transaction,
+            CommandType commandType, string commandText, NpgsqlParameter[] commandParameters,
+            NpgsqlConnectionOwnership connectionOwnership)
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
@@ -715,7 +750,8 @@ namespace PostGis.DAL
             NpgsqlCommand cmd = new NpgsqlCommand();
             try
             {
-                PrepareCommand(cmd, connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
+                PrepareCommand(cmd, connection, transaction, commandType, commandText, commandParameters,
+                    out mustCloseConnection);
 
                 // 创建数据阅读器 
                 NpgsqlDataReader dataReader;
@@ -767,9 +803,10 @@ namespace PostGis.DAL
         /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param> 
         /// <param name="commandText">存储过程名或T-SQL语句</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText)
+        public static NpgsqlDataReader ExecuteReader(string connectionString, CommandType commandType,
+            string commandText)
         {
-            return ExecuteReader(connectionString, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteReader(connectionString, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -784,16 +821,19 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名或T-SQL语句</param> 
         /// <param name="commandParameters">SqlParamter参数数组(new NpgsqlParameter("@prodid", 24))</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(string connectionString, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static NpgsqlDataReader ExecuteReader(string connectionString, CommandType commandType,
+            string commandText, params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             NpgsqlConnection connection = null;
             try
             {
                 connection = new NpgsqlConnection(connectionString);
                 connection.Open();
 
-                return ExecuteReader(connection, null, commandType, commandText, commandParameters, NpgsqlConnectionOwnership.Internal);
+                return ExecuteReader(connection, null, commandType, commandText, commandParameters,
+                    NpgsqlConnectionOwnership.Internal);
             }
             catch
             {
@@ -816,9 +856,11 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名</param> 
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(string connectionString, string spName, params object[] parameterValues)
+        public static NpgsqlDataReader ExecuteReader(string connectionString, string spName,
+            params object[] parameterValues)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             if ((parameterValues != null) && (parameterValues.Length > 0))
@@ -846,9 +888,10 @@ namespace PostGis.DAL
         /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param> 
         /// <param name="commandText">存储过程名或T-SQL语句</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, CommandType commandType, string commandText)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, CommandType commandType,
+            string commandText)
         {
-            return ExecuteReader(connection, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteReader(connection, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -863,9 +906,11 @@ namespace PostGis.DAL
         /// <param name="commandText">命令类型 (存储过程,命令文本或其它)</param> 
         /// <param name="commandParameters">SqlParamter参数数组</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, CommandType commandType,
+            string commandText, params NpgsqlParameter[] commandParameters)
         {
-            return ExecuteReader(connection, (NpgsqlTransaction)null, commandType, commandText, commandParameters, NpgsqlConnectionOwnership.External);
+            return ExecuteReader(connection, (NpgsqlTransaction) null, commandType, commandText, commandParameters,
+                NpgsqlConnectionOwnership.External);
         }
 
         /// <summary> 
@@ -880,7 +925,8 @@ namespace PostGis.DAL
         /// <param name="spName">T存储过程名</param> 
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, string spName, params object[] parameterValues)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlConnection connection, string spName,
+            params object[] parameterValues)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
@@ -910,9 +956,10 @@ namespace PostGis.DAL
         /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param> 
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, CommandType commandType, string commandText)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, CommandType commandType,
+            string commandText)
         {
-            return ExecuteReader(transaction, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteReader(transaction, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -927,12 +974,16 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, CommandType commandType,
+            string commandText, params NpgsqlParameter[] commandParameters)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
 
-            return ExecuteReader(transaction.Connection, transaction, commandType, commandText, commandParameters, NpgsqlConnectionOwnership.External);
+            return ExecuteReader(transaction.Connection, transaction, commandType, commandText, commandParameters,
+                NpgsqlConnectionOwnership.External);
         }
 
         /// <summary> 
@@ -948,16 +999,20 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名称</param> 
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, string spName, params object[] parameterValues)
+        public static NpgsqlDataReader ExecuteReader(NpgsqlTransaction transaction, string spName,
+            params object[] parameterValues)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果有参数值 
             if ((parameterValues != null) && (parameterValues.Length > 0))
             {
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 AssignParameterValues(commandParameters, parameterValues);
 
@@ -988,7 +1043,7 @@ namespace PostGis.DAL
         public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText)
         {
             // 执行参数为空的方法 
-            return ExecuteScalar(connectionString, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteScalar(connectionString, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -1003,9 +1058,11 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param> 
         /// <returns>返回结果集中的第一行第一列</returns> 
-        public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             // 创建并打开数据库连接对象,操作完成释放对象. 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
@@ -1031,7 +1088,8 @@ namespace PostGis.DAL
         /// <returns>返回结果集中的第一行第一列</returns> 
         public static object ExecuteScalar(string connectionString, string spName, params object[] parameterValues)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果有参数值 
@@ -1067,7 +1125,7 @@ namespace PostGis.DAL
         public static object ExecuteScalar(NpgsqlConnection connection, CommandType commandType, string commandText)
         {
             // 执行参数为空的方法 
-            return ExecuteScalar(connection, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteScalar(connection, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -1082,7 +1140,8 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param> 
         /// <returns>返回结果集中的第一行第一列</returns> 
-        public static object ExecuteScalar(NpgsqlConnection connection, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static object ExecuteScalar(NpgsqlConnection connection, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
@@ -1090,7 +1149,8 @@ namespace PostGis.DAL
             NpgsqlCommand cmd = new NpgsqlCommand();
 
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, connection, (NpgsqlTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, connection, (NpgsqlTransaction) null, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 执行NpgsqlCommand命令,并返回结果. 
             object retval = cmd.ExecuteScalar();
@@ -1155,7 +1215,7 @@ namespace PostGis.DAL
         public static object ExecuteScalar(NpgsqlTransaction transaction, CommandType commandType, string commandText)
         {
             // 执行参数为空的方法 
-            return ExecuteScalar(transaction, commandType, commandText, (NpgsqlParameter[])null);
+            return ExecuteScalar(transaction, commandType, commandText, (NpgsqlParameter[]) null);
         }
 
         /// <summary> 
@@ -1170,15 +1230,19 @@ namespace PostGis.DAL
         /// <param name="commandText">存储过程名称或T-SQL语句</param> 
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param> 
         /// <returns>返回结果集中的第一行第一列</returns> 
-        public static object ExecuteScalar(NpgsqlTransaction transaction, CommandType commandType, string commandText, params NpgsqlParameter[] commandParameters)
+        public static object ExecuteScalar(NpgsqlTransaction transaction, CommandType commandType, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
 
             // 创建NpgsqlCommand命令,并进行预处理 
             NpgsqlCommand cmd = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 执行NpgsqlCommand命令,并返回结果. 
             object retval = cmd.ExecuteScalar();
@@ -1204,14 +1268,17 @@ namespace PostGis.DAL
         public static object ExecuteScalar(NpgsqlTransaction transaction, string spName, params object[] parameterValues)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果有参数值 
             if ((parameterValues != null) && (parameterValues.Length > 0))
             {
                 // PPull the parameters for this stored procedure from the parameter cache () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 给存储过程参数赋值 
                 AssignParameterValues(commandParameters, parameterValues);
@@ -1228,8 +1295,8 @@ namespace PostGis.DAL
 
         #endregion ExecuteScalar
 
-       
         #region FillDataset 填充数据集
+
         /// <summary> 
         /// 执行指定数据库连接字符串的命令,映射数据表并填充数据集. 
         /// </summary> 
@@ -1243,9 +1310,11 @@ namespace PostGis.DAL
         /// <param name="dataSet">要填充结果集的DataSet实例</param> 
         /// <param name="tableNames">表映射的数据表数组 
         /// 用户定义的表名 (可有是实际的表名.)</param> 
-        public static void FillDataset(string connectionString, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
+        public static void FillDataset(string connectionString, CommandType commandType, string commandText,
+            DataSet dataSet, string[] tableNames)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (dataSet == null) throw new ArgumentNullException("dataSet");
 
             // 创建并打开数据库连接对象,操作完成释放对象. 
@@ -1277,7 +1346,8 @@ namespace PostGis.DAL
             string commandText, DataSet dataSet, string[] tableNames,
             params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (dataSet == null) throw new ArgumentNullException("dataSet");
             // 创建并打开数据库连接对象,操作完成释放对象. 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -1309,7 +1379,8 @@ namespace PostGis.DAL
             DataSet dataSet, string[] tableNames,
             params object[] parameterValues)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (dataSet == null) throw new ArgumentNullException("dataSet");
             // 创建并打开数据库连接对象,操作完成释放对象. 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -1446,7 +1517,8 @@ namespace PostGis.DAL
             string commandText, DataSet dataSet, string[] tableNames,
             params NpgsqlParameter[] commandParameters)
         {
-            FillDataset(transaction.Connection, transaction, commandType, commandText, dataSet, tableNames, commandParameters);
+            FillDataset(transaction.Connection, transaction, commandType, commandText, dataSet, tableNames,
+                commandParameters);
         }
 
         /// <summary> 
@@ -1470,7 +1542,9 @@ namespace PostGis.DAL
             params object[] parameterValues)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (dataSet == null) throw new ArgumentNullException("dataSet");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
@@ -1478,7 +1552,8 @@ namespace PostGis.DAL
             if ((parameterValues != null) && (parameterValues.Length > 0))
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 给存储过程参数赋值 
                 AssignParameterValues(commandParameters, parameterValues);
@@ -1509,7 +1584,8 @@ namespace PostGis.DAL
         /// 用户定义的表名 (可有是实际的表名.) 
         /// </param> 
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param> 
-        private static void FillDataset(NpgsqlConnection connection, NpgsqlTransaction transaction, CommandType commandType,
+        private static void FillDataset(NpgsqlConnection connection, NpgsqlTransaction transaction,
+            CommandType commandType,
             string commandText, DataSet dataSet, string[] tableNames,
             params NpgsqlParameter[] commandParameters)
         {
@@ -1519,7 +1595,8 @@ namespace PostGis.DAL
             // 创建NpgsqlCommand命令,并进行预处理 
             NpgsqlCommand command = new NpgsqlCommand();
             bool mustCloseConnection = false;
-            PrepareCommand(command, connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
+            PrepareCommand(command, connection, transaction, commandType, commandText, commandParameters,
+                out mustCloseConnection);
 
             // 执行命令 
             using (NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(command))
@@ -1531,7 +1608,10 @@ namespace PostGis.DAL
                     string tableName = "Table";
                     for (int index = 0; index < tableNames.Length; index++)
                     {
-                        if (tableNames[index] == null || tableNames[index].Length == 0) throw new ArgumentException("The tableNames parameter must contain a list of tables, a value was provided as null or empty string.", "tableNames");
+                        if (tableNames[index] == null || tableNames[index].Length == 0)
+                            throw new ArgumentException(
+                                "The tableNames parameter must contain a list of tables, a value was provided as null or empty string.",
+                                "tableNames");
                         dataAdapter.TableMappings.Add(tableName, tableNames[index]);
                         tableName += (index + 1).ToString();
                     }
@@ -1547,9 +1627,11 @@ namespace PostGis.DAL
             if (mustCloseConnection)
                 connection.Close();
         }
+
         #endregion
 
         #region UpdateDataset 更新数据集
+
         /// <summary> 
         /// 执行数据集更新到数据库,指定inserted, updated, or deleted命令. 
         /// </summary> 
@@ -1562,7 +1644,8 @@ namespace PostGis.DAL
         /// <param name="updateCommand">[更新记录]一个有效的T-SQL语句或存储过程</param> 
         /// <param name="dataSet">要更新到数据库的DataSet</param> 
         /// <param name="tableName">要更新到数据库的DataTable</param> 
-        public static void UpdateDataset(NpgsqlCommand insertCommand, NpgsqlCommand deleteCommand, NpgsqlCommand updateCommand, DataSet dataSet, string tableName)
+        public static void UpdateDataset(NpgsqlCommand insertCommand, NpgsqlCommand deleteCommand,
+            NpgsqlCommand updateCommand, DataSet dataSet, string tableName)
         {
             if (insertCommand == null) throw new ArgumentNullException("insertCommand");
             if (deleteCommand == null) throw new ArgumentNullException("deleteCommand");
@@ -1584,6 +1667,7 @@ namespace PostGis.DAL
                 dataSet.AcceptChanges();
             }
         }
+
         /// <summary> 
         /// 执行数据集更新到数据库,指定inserted, updated, or deleted命令. 
         /// </summary> 
@@ -1597,7 +1681,8 @@ namespace PostGis.DAL
         /// <param name="dataSet">要更新到数据库的DataSet</param> 
         /// <param name="tableName">要更新到数据库的DataTable</param> 
         /// <returns>返回影响的行数</returns>
-        public static int UpdateDataset(NpgsqlCommand insertCommand, NpgsqlCommand deleteCommand, NpgsqlCommand updateCommand, DataSet dataSet, int tableIndex)
+        public static int UpdateDataset(NpgsqlCommand insertCommand, NpgsqlCommand deleteCommand,
+            NpgsqlCommand updateCommand, DataSet dataSet, int tableIndex)
         {
             if (insertCommand == null) throw new ArgumentNullException("insertCommand");
             if (deleteCommand == null) throw new ArgumentNullException("deleteCommand");
@@ -1617,9 +1702,11 @@ namespace PostGis.DAL
                 return i;
             }
         }
+
         #endregion
 
         #region CreateCommand 创建一条NpgsqlCommand命令
+
         /// <summary> 
         /// 创建NpgsqlCommand命令,指定数据库连接对象,存储过程名和参数. 
         /// </summary> 
@@ -1631,7 +1718,8 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名称</param> 
         /// <param name="sourceColumns">源表的列名称数组</param> 
         /// <returns>返回NpgsqlCommand命令</returns> 
-        public static NpgsqlCommand CreateCommand(NpgsqlConnection connection, string spName, params string[] sourceColumns)
+        public static NpgsqlCommand CreateCommand(NpgsqlConnection connection, string spName,
+            params string[] sourceColumns)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
@@ -1656,9 +1744,11 @@ namespace PostGis.DAL
 
             return cmd;
         }
+
         #endregion
 
         #region ExecuteNonQueryTypedParams 类型化参数(DataRow)
+
         /// <summary> 
         /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回受影响的行数. 
         /// </summary> 
@@ -1668,7 +1758,8 @@ namespace PostGis.DAL
         /// <returns>返回影响的行数</returns> 
         public static int ExecuteNonQueryTypedParams(String connectionString, String spName, DataRow dataRow)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
@@ -1727,14 +1818,17 @@ namespace PostGis.DAL
         public static int ExecuteNonQueryTypedParams(NpgsqlTransaction transaction, String spName, DataRow dataRow)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // Sf the row has values, the store procedure parameters must be initialized 
             if (dataRow != null && dataRow.ItemArray.Length > 0)
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 分配参数值 
                 AssignParameterValues(commandParameters, dataRow);
@@ -1746,9 +1840,11 @@ namespace PostGis.DAL
                 return ExecuteNonQuery(transaction, CommandType.StoredProcedure, spName);
             }
         }
+
         #endregion
 
         #region ExecuteDatasetTypedParams 类型化参数(DataRow)
+
         /// <summary> 
         /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回DataSet. 
         /// </summary> 
@@ -1758,7 +1854,8 @@ namespace PostGis.DAL
         /// <returns>返回一个包含结果集的DataSet.</returns> 
         public static DataSet ExecuteDatasetTypedParams(string connectionString, String spName, DataRow dataRow)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             //如果row有值,存储过程必须初始化. 
@@ -1818,14 +1915,17 @@ namespace PostGis.DAL
         public static DataSet ExecuteDatasetTypedParams(NpgsqlTransaction transaction, String spName, DataRow dataRow)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
             if (dataRow != null && dataRow.ItemArray.Length > 0)
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 分配参数值 
                 AssignParameterValues(commandParameters, dataRow);
@@ -1841,6 +1941,7 @@ namespace PostGis.DAL
         #endregion
 
         #region ExecuteReaderTypedParams 类型化参数(DataRow)
+
         /// <summary> 
         /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回DataReader. 
         /// </summary> 
@@ -1850,7 +1951,8 @@ namespace PostGis.DAL
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
         public static NpgsqlDataReader ExecuteReaderTypedParams(String connectionString, String spName, DataRow dataRow)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
@@ -1878,7 +1980,8 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名称</param> 
         /// <param name="dataRow">使用DataRow作为参数值</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReaderTypedParams(NpgsqlConnection connection, String spName, DataRow dataRow)
+        public static NpgsqlDataReader ExecuteReaderTypedParams(NpgsqlConnection connection, String spName,
+            DataRow dataRow)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
@@ -1907,17 +2010,21 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名称</param> 
         /// <param name="dataRow">使用DataRow作为参数值</param> 
         /// <returns>返回包含结果集的NpgsqlDataReader</returns> 
-        public static NpgsqlDataReader ExecuteReaderTypedParams(NpgsqlTransaction transaction, String spName, DataRow dataRow)
+        public static NpgsqlDataReader ExecuteReaderTypedParams(NpgsqlTransaction transaction, String spName,
+            DataRow dataRow)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
             if (dataRow != null && dataRow.ItemArray.Length > 0)
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 分配参数值 
                 AssignParameterValues(commandParameters, dataRow);
@@ -1929,9 +2036,11 @@ namespace PostGis.DAL
                 return ExecuteReader(transaction, CommandType.StoredProcedure, spName);
             }
         }
+
         #endregion
 
         #region ExecuteScalarTypedParams 类型化参数(DataRow)
+
         /// <summary> 
         /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回结果集中的第一行第一列. 
         /// </summary> 
@@ -1941,7 +2050,8 @@ namespace PostGis.DAL
         /// <returns>返回结果集中的第一行第一列</returns> 
         public static object ExecuteScalarTypedParams(String connectionString, String spName, DataRow dataRow)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
@@ -2000,14 +2110,17 @@ namespace PostGis.DAL
         public static object ExecuteScalarTypedParams(NpgsqlTransaction transaction, String spName, DataRow dataRow)
         {
             if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+            if (transaction != null && transaction.Connection == null)
+                throw new ArgumentException(
+                    "The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             // 如果row有值,存储过程必须初始化. 
             if (dataRow != null && dataRow.ItemArray.Length > 0)
             {
                 // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. () 
-                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection, spName);
+                NpgsqlParameter[] commandParameters = PgHelperParameterCache.GetSpParameterSet(transaction.Connection,
+                    spName);
 
                 // 分配参数值 
                 AssignParameterValues(commandParameters, dataRow);
@@ -2019,8 +2132,9 @@ namespace PostGis.DAL
                 return ExecuteScalar(transaction, CommandType.StoredProcedure, spName);
             }
         }
+
         #endregion
-        
+
     }
 
     /// <summary> 
@@ -2029,6 +2143,7 @@ namespace PostGis.DAL
     public static class PgHelperParameterCache
     {
         #region 私有方法,字段,构造函数
+
         // 私有构造函数,妨止类被实例化. 
 
         // 这个方法要注意 
@@ -2042,7 +2157,8 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名称</param> 
         /// <param name="includeReturnValueParameter">是否包含返回值参数</param> 
         /// <returns>返回NpgsqlParameter参数数组</returns> 
-        private static NpgsqlParameter[] DiscoverSpParameterSet(NpgsqlConnection connection, string spName, bool includeReturnValueParameter)
+        private static NpgsqlParameter[] DiscoverSpParameterSet(NpgsqlConnection connection, string spName,
+            bool includeReturnValueParameter)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
@@ -2084,7 +2200,7 @@ namespace PostGis.DAL
 
             for (int i = 0, j = originalParameters.Length; i < j; i++)
             {
-                clonedParameters[i] = (NpgsqlParameter)((ICloneable)originalParameters[i]).Clone();
+                clonedParameters[i] = (NpgsqlParameter) ((ICloneable) originalParameters[i]).Clone();
             }
 
             return clonedParameters;
@@ -2100,9 +2216,11 @@ namespace PostGis.DAL
         /// <param name="connectionString">一个有效的数据库连接字符串</param> 
         /// <param name="commandText">存储过程名或SQL语句</param> 
         /// <param name="commandParameters">要缓存的参数数组</param> 
-        public static void CacheParameterSet(string connectionString, string commandText, params NpgsqlParameter[] commandParameters)
+        public static void CacheParameterSet(string connectionString, string commandText,
+            params NpgsqlParameter[] commandParameters)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (commandText == null || commandText.Length == 0) throw new ArgumentNullException("commandText");
 
             string hashKey = connectionString + ":" + commandText;
@@ -2118,7 +2236,8 @@ namespace PostGis.DAL
         /// <returns>参数数组</returns> 
         public static NpgsqlParameter[] GetCachedParameterSet(string connectionString, string commandText)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (commandText == null || commandText.Length == 0) throw new ArgumentNullException("commandText");
 
             string hashKey = connectionString + ":" + commandText;
@@ -2162,9 +2281,11 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名</param> 
         /// <param name="includeReturnValueParameter">是否包含返回值参数</param> 
         /// <returns>返回NpgsqlParameter参数数组</returns> 
-        public static NpgsqlParameter[] GetSpParameterSet(string connectionString, string spName, bool includeReturnValueParameter)
+        public static NpgsqlParameter[] GetSpParameterSet(string connectionString, string spName,
+            bool includeReturnValueParameter)
         {
-            if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("connectionString");
+            if (connectionString == null || connectionString.Length == 0)
+                throw new ArgumentNullException("connectionString");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -2199,10 +2320,11 @@ namespace PostGis.DAL
         /// 是否包含返回值参数 
         /// </param> 
         /// <returns>返回NpgsqlParameter参数数组</returns> 
-        internal static NpgsqlParameter[] GetSpParameterSet(NpgsqlConnection connection, string spName, bool includeReturnValueParameter)
+        internal static NpgsqlParameter[] GetSpParameterSet(NpgsqlConnection connection, string spName,
+            bool includeReturnValueParameter)
         {
             if (connection == null) throw new ArgumentNullException("connection");
-            using (NpgsqlConnection clonedConnection = (NpgsqlConnection)((ICloneable)connection).Clone())
+            using (NpgsqlConnection clonedConnection = (NpgsqlConnection) ((ICloneable) connection).Clone())
             {
                 return GetSpParameterSetInternal(clonedConnection, spName, includeReturnValueParameter);
             }
@@ -2215,12 +2337,14 @@ namespace PostGis.DAL
         /// <param name="spName">存储过程名</param> 
         /// <param name="includeReturnValueParameter">是否包含返回值参数</param> 
         /// <returns>返回NpgsqlParameter参数数组</returns> 
-        private static NpgsqlParameter[] GetSpParameterSetInternal(NpgsqlConnection connection, string spName, bool includeReturnValueParameter)
+        private static NpgsqlParameter[] GetSpParameterSetInternal(NpgsqlConnection connection, string spName,
+            bool includeReturnValueParameter)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
-            string hashKey = connection.ConnectionString + ":" + spName + (includeReturnValueParameter ? ":include ReturnValue Parameter" : "");
+            string hashKey = connection.ConnectionString + ":" + spName +
+                             (includeReturnValueParameter ? ":include ReturnValue Parameter" : "");
 
             NpgsqlParameter[] cachedParameters;
 

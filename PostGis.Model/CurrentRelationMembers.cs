@@ -8,11 +8,11 @@ namespace PostGis.Model
 {
     public class CurrentRelationMembers
     {
-        public string MemberRole { get; set; }
-        public long MemberId { get; set; }
-        public long MemberType { get; set; }
-        public long Idid { get; set; }
-        public int SequenceId { get; set; }
-        public CurrentRelations CurrentRelations { get; set; }
+        public virtual string MemberRole { get; set; }
+        public virtual long MemberId { get; set; }
+        public virtual long MemberType { get; set; }
+        public virtual long Idid { get; set; }
+        public virtual int SequenceId { get; set; }
+        public virtual CurrentRelations CurrentRelations { get; set; }
     }
 }

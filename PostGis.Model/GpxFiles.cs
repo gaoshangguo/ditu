@@ -9,16 +9,16 @@ namespace PostGis.Model
     public class GpxFiles
     {
         public GpxFiles() { }
-        public long Id { get; set; }
-        public Users Users { get; set; }
-        public long? Size { get; set; }
-        public bool Visible { get; set; }
-        public string Timestamp { get; set; }
-        public string Description { get; set; }
-        public string Name { get; set; }
-        public string Longitude { get; set; }
-        public bool Inserted { get; set; }
-        public long Visibility { get; set; }
-        public string Latitude { get; set; }
+        public virtual long Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual long? Size { get; set; }
+        public virtual bool Visible { get; set; }
+        public virtual string Timestamp { get; set; }
+        public virtual string Description { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Longitude { get; set; }
+        public virtual bool Inserted { get; set; }
+        public virtual long Visibility { get; set; }
+        public virtual string Latitude { get; set; }
     }
 }

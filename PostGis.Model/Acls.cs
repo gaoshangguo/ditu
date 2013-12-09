@@ -3,10 +3,10 @@ namespace PostGis.Model
 {
     public class Acls
     {
-        public int Id { get; set; }
-        public string Netmask { get; set; }
-        public string V { get; set; }
-        public string Address { get; set; }
-        public string K { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Netmask { get; set; }
+        public virtual string V { get; set; }
+        public virtual string Address { get; set; }
+        public virtual string K { get; set; }
     }
 }

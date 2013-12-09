@@ -8,9 +8,9 @@ namespace PostGis.Model
 {
     public class ConstString
     {
-        public long Id { get; set; }
-        public string T { get; set; }
-        public string V { get; set; }
-        public string K { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string T { get; set; }
+        public virtual string V { get; set; }
+        public virtual string K { get; set; }
     }
 }

@@ -8,13 +8,13 @@ namespace PostGis.Model
 {
     public class UserBlocks
     {
-        public int Id { get; set; }
-        public Users Users { get; set; }
-        public long CreatorId { get; set; }
-        public string UpdatedAt { get; set; }
-        public string Reason { get; set; }
-        public string CreatedAt { get; set; }
-        public string EndsAt { get; set; }
-        public bool NeedsView { get; set; }
+        public virtual int Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual long CreatorId { get; set; }
+        public virtual string UpdatedAt { get; set; }
+        public virtual string Reason { get; set; }
+        public virtual string CreatedAt { get; set; }
+        public virtual string EndsAt { get; set; }
+        public virtual bool NeedsView { get; set; }
     }
 }

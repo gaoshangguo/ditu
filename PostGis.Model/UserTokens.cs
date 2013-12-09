@@ -8,10 +8,10 @@ namespace PostGis.Model
 {
     public class UserTokens
     {
-        public long Id { get; set; }
-        public Users Users { get; set; }
-        public string Token { get; set; }
-        public string Referer { get; set; }
-        public string Expiry { get; set; }
+        public virtual long Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual string Token { get; set; }
+        public virtual string Referer { get; set; }
+        public virtual string Expiry { get; set; }
     }
 }

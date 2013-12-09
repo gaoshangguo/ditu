@@ -42,7 +42,6 @@
     <Compile Include="Acls.cs" />
     <Compile Include="Changesets.cs" />
     <Compile Include="ChangesetTags.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ClientApplications.cs" />
     <Compile Include="ConstString.cs" />
     <Compile Include="Countries.cs" />

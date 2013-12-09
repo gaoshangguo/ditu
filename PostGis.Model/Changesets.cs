@@ -9,14 +9,14 @@ namespace PostGis.Model
     public class Changesets
     {
         public Changesets() { }
-        public long Id { get; set; }
-        public Users Users { get; set; }
-        public int? MinLat { get; set; }
-        public int? MaxLon { get; set; }
-        public int? MinLon { get; set; }
-        public int? MaxLat { get; set; }
-        public string ClosedAt { get; set; }
-        public string CreatedAt { get; set; }
-        public int NumChanges { get; set; }
+        public virtual long Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual int? MinLat { get; set; }
+        public virtual int? MaxLon { get; set; }
+        public virtual int? MinLon { get; set; }
+        public virtual int? MaxLat { get; set; }
+        public virtual string ClosedAt { get; set; }
+        public virtual string CreatedAt { get; set; }
+        public virtual int NumChanges { get; set; }
     }
 }

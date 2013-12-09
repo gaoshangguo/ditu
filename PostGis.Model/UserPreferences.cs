@@ -8,9 +8,9 @@ namespace PostGis.Model
 {
     public class UserPreferences
     {
-        public string K { get; set; }
-        public long UserIdid { get; set; }
-        public Users User { get; set; }
-        public string V { get; set; }
+        public virtual string K { get; set; }
+        public virtual long UserIdid { get; set; }
+        public virtual Users User { get; set; }
+        public virtual string V { get; set; }
     }
 }

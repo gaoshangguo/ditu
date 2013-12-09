@@ -8,8 +8,8 @@ namespace PostGis.Model
 {
     public class GpxFileTags
     {
-        public long Id { get; set; }
-        public GpxFiles GpxFiles { get; set; }
-        public string Tag { get; set; }
+        public virtual long Id { get; set; }
+        public virtual GpxFiles GpxFiles { get; set; }
+        public virtual string Tag { get; set; }
     }
 }

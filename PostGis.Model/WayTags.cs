@@ -8,10 +8,10 @@ namespace PostGis.Model
 {
     public class WayTags
     {
-        public string K { get; set; }
-        public long Idid { get; set; }
-        public long Version { get; set; }
-        public Ways Ways { get; set; }
-        public string V { get; set; }
+        public virtual string K { get; set; }
+        public virtual long Idid { get; set; }
+        public virtual long Version { get; set; }
+        public virtual Ways Ways { get; set; }
+        public virtual string V { get; set; }
     }
 }

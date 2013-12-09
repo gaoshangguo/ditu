@@ -8,10 +8,10 @@ namespace PostGis.Model
 {
     public class OauthNonces
     {
-        public int Id { get; set; }
-        public string UpdatedAt { get; set; }
-        public string Nonce { get; set; }
-        public string CreatedAt { get; set; }
-        public int? Timestamp { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string UpdatedAt { get; set; }
+        public virtual string Nonce { get; set; }
+        public virtual string CreatedAt { get; set; }
+        public virtual int? Timestamp { get; set; }
     }
 }

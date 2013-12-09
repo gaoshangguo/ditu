@@ -8,9 +8,9 @@ namespace PostGis.Model
 {
     public class ChangesetTags
     {
-        public Changesets Changesets { get; set; }
-        public string V { get; set; }
-        public string K { get; set; }
+        public virtual Changesets Changesets { get; set; }
+        public virtual string V { get; set; }
+        public virtual string K { get; set; }
 
     }
 }

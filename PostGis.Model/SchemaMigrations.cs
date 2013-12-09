@@ -8,6 +8,6 @@ namespace PostGis.Model
 {
     public class SchemaMigrations
     {
-        public string Version { get; set; }
+        public virtual string Version { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace PostGis.Model
 {
     public class Friends
     {
-        public long Id { get; set; }
-        public Users Users { get; set; }
+        public virtual long Id { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

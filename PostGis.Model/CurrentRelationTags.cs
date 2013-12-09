@@ -8,9 +8,9 @@ namespace PostGis.Model
 {
     public class CurrentRelationTags
     {
-        public string K { get; set; }
-        public long Idid { get; set; }
-        public CurrentRelations CurrentRelations { get; set; }
-        public string V { get; set; }
+        public virtual string K { get; set; }
+        public virtual long Idid { get; set; }
+        public virtual CurrentRelations CurrentRelations { get; set; }
+        public virtual string V { get; set; }
     }
 }

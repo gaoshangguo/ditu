@@ -9,14 +9,14 @@ namespace PostGis.Model
     public class DiaryEntries
     {
         public DiaryEntries() { }
-        public long Id { get; set; }
-        public Users Users { get; set; }
-        public Languages Languages { get; set; }
-        public string Body { get; set; }
-        public string Title { get; set; }
-        public string UpdatedAt { get; set; }
-        public string Longitude { get; set; }
-        public string CreatedAt { get; set; }
-        public string Latitude { get; set; }
+        public virtual long Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual Languages Languages { get; set; }
+        public virtual string Body { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string UpdatedAt { get; set; }
+        public virtual string Longitude { get; set; }
+        public virtual string CreatedAt { get; set; }
+        public virtual string Latitude { get; set; }
     }
 }

@@ -8,21 +8,21 @@ namespace PostGis.Model
 {
     public class OauthTokens
     {
-        public int Id { get; set; }
-        public Users Users { get; set; }
-        public ClientApplications ClientApplications { get; set; }
-        public string Token { get; set; }
-        public string Type { get; set; }
-        public string InvalidatedAt { get; set; }
-        public bool AllowWriteGpx { get; set; }
-        public bool AllowReadGpx { get; set; }
-        public string UpdatedAt { get; set; }
-        public bool AllowReadPrefs { get; set; }
-        public bool AllowWriteApi { get; set; }
-        public string AuthorizedAt { get; set; }
-        public string CreatedAt { get; set; }
-        public bool AllowWritePrefs { get; set; }
-        public bool AllowWriteDiary { get; set; }
-        public string Secret { get; set; }
+        public virtual int Id { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual ClientApplications ClientApplications { get; set; }
+        public virtual string Token { get; set; }
+        public virtual string Type { get; set; }
+        public virtual string InvalidatedAt { get; set; }
+        public virtual bool AllowWriteGpx { get; set; }
+        public virtual bool AllowReadGpx { get; set; }
+        public virtual string UpdatedAt { get; set; }
+        public virtual bool AllowReadPrefs { get; set; }
+        public virtual bool AllowWriteApi { get; set; }
+        public virtual string AuthorizedAt { get; set; }
+        public virtual string CreatedAt { get; set; }
+        public virtual bool AllowWritePrefs { get; set; }
+        public virtual bool AllowWriteDiary { get; set; }
+        public virtual string Secret { get; set; }
     }
 }

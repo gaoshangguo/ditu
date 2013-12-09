@@ -9,24 +9,24 @@ namespace PostGis.Model
     public class Users
     {
         public Users() { }
-        public long Id { get; set; }
-        public string Email { get; set; }
-        public bool EmailValid { get; set; }
-        public string HomeLat { get; set; }
-        public bool DataPublic { get; set; }
-        public string Image { get; set; }
-        public bool Visible { get; set; }
-        public int Active { get; set; }
-        public string DisplayName { get; set; }
-        public string NewEmail { get; set; }
-        public string CreationTime { get; set; }
-        public string HomeLon { get; set; }
-        public string Description { get; set; }
-        public short? HomeZoom { get; set; }
-        public string Languages { get; set; }
-        public int? Nearby { get; set; }
-        public string PassCrypt { get; set; }
-        public string CreationIp { get; set; }
-        public string PassSalt { get; set; }
+        public virtual long Id { get; set; }
+        public virtual string Email { get; set; }
+        public virtual bool EmailValid { get; set; }
+        public virtual string HomeLat { get; set; }
+        public virtual bool DataPublic { get; set; }
+        public virtual string Image { get; set; }
+        public virtual bool Visible { get; set; }
+        public virtual int Active { get; set; }
+        public virtual string DisplayName { get; set; }
+        public virtual string NewEmail { get; set; }
+        public virtual string CreationTime { get; set; }
+        public virtual string HomeLon { get; set; }
+        public virtual string Description { get; set; }
+        public virtual short? HomeZoom { get; set; }
+        public virtual string Languages { get; set; }
+        public virtual int? Nearby { get; set; }
+        public virtual string PassCrypt { get; set; }
+        public virtual string CreationIp { get; set; }
+        public virtual string PassSalt { get; set; }
     }
 }

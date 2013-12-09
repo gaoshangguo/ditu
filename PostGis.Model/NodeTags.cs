@@ -8,10 +8,10 @@ namespace PostGis.Model
 {
     public class NodeTags
     {
-        public string K { get; set; }
-        public long Idid { get; set; }
-        public long Version { get; set; }
-        public Nodes Nodes { get; set; }
-        public string V { get; set; }
+        public virtual string K { get; set; }
+        public virtual long Idid { get; set; }
+        public virtual long Version { get; set; }
+        public virtual Nodes Nodes { get; set; }
+        public virtual string V { get; set; }
     }
 }

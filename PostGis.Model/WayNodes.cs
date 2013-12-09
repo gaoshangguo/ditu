@@ -8,10 +8,10 @@ namespace PostGis.Model
 {
     public class WayNodes
     {
-        public long SequenceId { get; set; }
-        public long Idid { get; set; }
-        public long Version { get; set; }
-        public Ways Ways { get; set; }
-        public long NodeId { get; set; }
+        public virtual long SequenceId { get; set; }
+        public virtual long Idid { get; set; }
+        public virtual long Version { get; set; }
+        public virtual Ways Ways { get; set; }
+        public virtual long NodeId { get; set; }
     }
 }

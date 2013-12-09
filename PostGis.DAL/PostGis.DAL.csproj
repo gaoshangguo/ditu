@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conventions\RecordTableNameConvention.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="ISessionConfigurationEvents.cs" />
     <Compile Include="PgHelper.cs" />

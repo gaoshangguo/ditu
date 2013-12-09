@@ -23,10 +23,10 @@ namespace PostGis.DAL.Providers
 
         protected AbstractDataServicesProvider()
         {
-            Logger = NullLogger.Instance;
+            //Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
+        //public ILogger Logger { get; set; }
 
         public Configuration BuildConfiguration(SessionFactoryParameters parameters)
         {
@@ -50,7 +50,7 @@ namespace PostGis.DAL.Providers
             return config.BuildConfiguration();
         }
 
-        public static AutoPersistenceModel CreatePersistenceModel(ICollection<RecordBlueprint> recordDescriptors)
+        public static AutoPersistenceModel CreatePersistenceModel(ICollection<Molde> recordDescriptors)
         {
             if (recordDescriptors == null)
             {
@@ -99,33 +99,33 @@ namespace PostGis.DAL.Providers
         class PostGisLoadEventListener : DefaultLoadEventListener, ILoadEventListener
         {
 
-            public new void OnLoad(LoadEvent @event, LoadType loadType)
+            public new void OnLoad(LoadEvent localEvent, LoadType loadType)
             {
-                var source = (ISessionImplementor)@event.Session;
+                var source = (ISessionImplementor)localEvent.Session;
                 IEntityPersister entityPersister;
-                if (@event.InstanceToLoad != null)
+                if (localEvent.InstanceToLoad != null)
                 {
-                    entityPersister = source.GetEntityPersister(null, @event.InstanceToLoad);
-                    @event.EntityClassName = @event.InstanceToLoad.GetType().FullName;
+                    entityPersister = source.GetEntityPersister(null, localEvent.InstanceToLoad);
+                    localEvent.EntityClassName = localEvent.InstanceToLoad.GetType().FullName;
                 }
                 else
-                    entityPersister = source.Factory.GetEntityPersister(@event.EntityClassName);
+                    entityPersister = source.Factory.GetEntityPersister(localEvent.EntityClassName);
                 if (entityPersister == null)
-                    throw new HibernateException("Unable to locate persister: " + @event.EntityClassName);
+                    throw new HibernateException("Unable to locate persister: " + localEvent.EntityClassName);
                 
-                var keyToLoad = new EntityKey(@event.EntityId, entityPersister, source.EntityMode);
+                var keyToLoad = new EntityKey(localEvent.EntityId, entityPersister, source.EntityMode);
 
                 if (loadType.IsNakedEntityReturned)
                 {
-                    @event.Result = Load(@event, entityPersister, keyToLoad, loadType);
+                    localEvent.Result = Load(localEvent, entityPersister, keyToLoad, loadType);
                 }
-                else if (@event.LockMode == LockMode.None)
+                else if (localEvent.LockMode == LockMode.None)
                 {
-                    @event.Result = ProxyOrLoad(@event, entityPersister, keyToLoad, loadType);
+                    localEvent.Result = ProxyOrLoad(localEvent, entityPersister, keyToLoad, loadType);
                 }
                 else
                 {
-                    @event.Result = LockAndLoad(@event, entityPersister, keyToLoad, loadType, source);
+                    localEvent.Result = LockAndLoad(localEvent, entityPersister, keyToLoad, loadType, source);
                 }
             }
         }

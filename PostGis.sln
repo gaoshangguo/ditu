@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Model", "PostGis.Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.BLL", "PostGis.BLL\PostGis.BLL.csproj", "{1E1BE276-BD58-4B74-AD08-0C12BFB40DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Framework", "PostGis.Framework\PostGis.Framework.csproj", "{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{1E1BE276-BD58-4B74-AD08-0C12BFB40DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E1BE276-BD58-4B74-AD08-0C12BFB40DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E1BE276-BD58-4B74-AD08-0C12BFB40DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

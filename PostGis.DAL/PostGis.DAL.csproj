@@ -76,20 +76,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conventions\RecordTableNameConvention.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="ISessionConfigurationEvents.cs" />
     <Compile Include="PgHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AbstractDataServicesProvider.cs" />
     <Compile Include="Providers\DataServiceParameters.cs" />
-    <Compile Include="Providers\DataServicesProviderFactory.cs" />
-    <Compile Include="Providers\IDataServicesProvider.cs" />
-    <Compile Include="Providers\IDataServicesProviderFactory.cs" />
     <Compile Include="Providers\ISqlStatementProvider.cs" />
     <Compile Include="Providers\PgSqlDataServicesProvider.cs" />
     <Compile Include="Providers\PgSqlStatementProvider.cs" />
-    <Compile Include="Providers\SessionFactoryParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -101,7 +96,15 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PostGis.Model\PostGis.Model.csproj">
+      <Project>{97a11288-95b5-4980-80de-da2ef57232a7}</Project>
+      <Name>PostGis.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Conventions\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

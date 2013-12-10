@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NHibernate;
 using PostGis;
 using PostGis.Controllers;
+using PostGis.DAL.Providers;
+using System.Configuration;
+using PostGis.Model;
 
 namespace PostGis.Tests.Controllers
 {
@@ -49,6 +53,26 @@ namespace PostGis.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void CreateDatabase()
+        {
+            PgSqlDataServicesProvider pgSqlDataServices=new PgSqlDataServicesProvider(ConfigurationManager.ConnectionStrings[0].ToString());
+            ISessionFactory factory = pgSqlDataServices.CreateSessionFactory();
+            using (var session = factory.OpenSession())
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    Acls acls=new Acls();
+                    acls.Address = "abc";
+                    
+                    
+
+                    session.SaveOrUpdate();
+                    transaction.Commit();
+                }
+            }
         }
     }
 }

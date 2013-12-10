@@ -9,12 +9,10 @@ namespace PostGis.DAL.Providers
 {
     public class PgSqlDataServicesProvider : AbstractDataServicesProvider
     {
-        private readonly string _dataFolder;
         private readonly string _connectionString;
 
-        public PgSqlDataServicesProvider(string dataFolder, string connectionString)
+        public PgSqlDataServicesProvider(string connectionString)
         {
-            _dataFolder = dataFolder;
             _connectionString = connectionString;
         }
 

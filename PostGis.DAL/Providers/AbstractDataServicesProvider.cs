@@ -12,6 +12,7 @@ using NHibernate.Engine;
 using NHibernate.Event;
 using NHibernate.Event.Default;
 using NHibernate.Persister.Entity;
+using NHibernate.Tool.hbm2ddl;
 using PostGis.Model;
 
 namespace PostGis.DAL.Providers
@@ -32,9 +33,28 @@ namespace PostGis.DAL.Providers
             return config.BuildConfiguration();
         }
 
-        public static AutoPersistenceModel CreatePersistenceModel()
+        public AutoPersistenceModel CreatePersistenceModel()
         {
             return AutoMap.AssemblyOf<Users>(new AutomappingConfiguration());
+        }
+
+        public ISessionFactory CreateSessionFactory()
+        {
+            var database = GetPersistenceConfigurer(CreateDatabase);
+            var persistenceModel = CreatePersistenceModel();
+            return Fluently.Configure().Database(database)
+                .Mappings(m =>
+                    m.AutoMappings.Add(persistenceModel))
+                .ExposeConfiguration(BuildSchema)
+                .BuildSessionFactory();
+        }
+
+        private void BuildSchema(Configuration config)
+        {
+            // this NHibernate tool takes a configuration (with mapping info in)
+            // and exports a database schema from it
+            new SchemaExport(config)
+                .Create(false, true);
         }
     }
 

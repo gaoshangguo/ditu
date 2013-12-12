@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class DiaryEntries
+    public class DiaryEntries : ITable
     {
         public DiaryEntries() { }
         public virtual long Id { get; set; }

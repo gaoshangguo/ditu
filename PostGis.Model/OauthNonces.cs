@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class OauthNonces
+    public class OauthNonces : ITable
     {
         public virtual int Id { get; set; }
         public virtual string UpdatedAt { get; set; }

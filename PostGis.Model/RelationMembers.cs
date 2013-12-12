@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class RelationMembers
+    public class RelationMembers : ITable
     {
         public virtual string MemberRole { get; set; }
         public virtual long MemberId { get; set; }

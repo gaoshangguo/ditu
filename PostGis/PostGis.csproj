@@ -1390,12 +1390,19 @@
     <Content Include="Scripts\Leaflet\package.json" />
     <Content Include="Scripts\Leaflet\PLUGIN-GUIDE.md" />
     <Content Include="Scripts\Leaflet\README.md" />
+    <Content Include="Views\Home\CreateDb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PostGis.BLL\PostGis.BLL.csproj">
+      <Project>{1e1be276-bd58-4b74-ad08-0c12bfb40da6}</Project>
+      <Name>PostGis.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

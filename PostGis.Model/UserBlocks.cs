@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class UserBlocks
+    public class UserBlocks : ITable
     {
         public virtual int Id { get; set; }
         public virtual Users Users { get; set; }

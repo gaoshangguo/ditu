@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class SchemaMigrations
+    public class SchemaMigrations : ITable
     {
         public virtual string Version { get; set; }
     }

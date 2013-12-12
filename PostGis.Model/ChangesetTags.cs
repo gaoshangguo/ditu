@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class ChangesetTags
+    public class ChangesetTags : ITable
     {
         public virtual Changesets Changesets { get; set; }
         public virtual string V { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PostGis.BLL;
 
 namespace PostGis.Controllers
 {
@@ -26,6 +27,13 @@ namespace PostGis.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            return View();
+        }
+
+        public ActionResult CreateDb()
+        {
+            TestDbBll testDbBll=new TestDbBll();
+            testDbBll.createDb();
             return View();
         }
     }

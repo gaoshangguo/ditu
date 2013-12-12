@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class GpxFileTags
+    public class GpxFileTags : ITable
     {
         public virtual long Id { get; set; }
         public virtual GpxFiles GpxFiles { get; set; }

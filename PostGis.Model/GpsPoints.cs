@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class GpsPoints
+    public class GpsPoints : ITable
     {
         public virtual GpxFiles GpxFiles { get; set; }
         public virtual long? Tile { get; set; }

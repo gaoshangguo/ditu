@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class Sessions
+    public class Sessions : ITable
     {
         public virtual int Id { get; set; }
         public virtual string SessionId { get; set; }

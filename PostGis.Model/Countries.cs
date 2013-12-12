@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class Countries
+    public class Countries : ITable
     {
         public virtual int Id { get; set; }
         public virtual string Code { get; set; }

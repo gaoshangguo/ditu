@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class Changesets
+    public class Changesets : ITable
     {
         public Changesets() { }
         public virtual long Id { get; set; }
@@ -15,8 +15,8 @@ namespace PostGis.Model
         public virtual int? MaxLon { get; set; }
         public virtual int? MinLon { get; set; }
         public virtual int? MaxLat { get; set; }
-        public virtual string ClosedAt { get; set; }
-        public virtual string CreatedAt { get; set; }
+        public virtual DateTime ClosedAt { get; set; }
+        public virtual DateTime CreatedAt { get; set; }
         public virtual int NumChanges { get; set; }
     }
 }

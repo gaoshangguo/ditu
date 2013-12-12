@@ -35,7 +35,7 @@ namespace PostGis.DAL.Providers
 
         public AutoPersistenceModel CreatePersistenceModel()
         {
-            return AutoMap.AssemblyOf<Users>(new AutomappingConfiguration());
+            return AutoMap.AssemblyOf<ChangesetTags>(new AutomappingConfiguration());
         }
 
         public ISessionFactory CreateSessionFactory()
@@ -45,7 +45,6 @@ namespace PostGis.DAL.Providers
             return Fluently.Configure().Database(database)
                 .Mappings(m =>
                     m.AutoMappings.Add(persistenceModel))
-                .ExposeConfiguration(BuildSchema)
                 .BuildSessionFactory();
         }
 
@@ -62,12 +61,7 @@ namespace PostGis.DAL.Providers
     {
         public override bool ShouldMap(Type type)
         {
-            return type.Namespace == typeof (Users).Namespace;
-        }
-
-        public override bool IsComponent(Type type)
-        {
-            return false;
+            return type.GetInterfaces().Contains(typeof(ITable));
         }
     }
 }

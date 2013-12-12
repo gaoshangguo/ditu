@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class CurrentWays
+    public class CurrentWays : ITable
     {
         public CurrentWays() { }
         public virtual long Id { get; set; }

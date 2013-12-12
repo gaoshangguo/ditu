@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class ClientApplications
+    public class ClientApplications : ITable
     {
         public ClientApplications() { }
         public virtual int Id { get; set; }

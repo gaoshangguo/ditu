@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class ConstString
+    public class ConstString : ITable
     {
         public virtual long Id { get; set; }
         public virtual string T { get; set; }

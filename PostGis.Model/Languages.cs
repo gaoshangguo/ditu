@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class Languages
+    public class Languages : ITable
     {
         public Languages() { }
         public virtual string Code { get; set; }

@@ -66,10 +66,10 @@ namespace PostGis.Tests.Controllers
                 {
                     Acls acls=new Acls();
                     acls.Address = "abc";
-                    
-                    
 
-                    session.SaveOrUpdate();
+
+
+                    session.SaveOrUpdate(acls);
                     transaction.Commit();
                 }
             }

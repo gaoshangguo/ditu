@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class NodeTags
+    public class NodeTags : ITable
     {
         public virtual string K { get; set; }
         public virtual long Idid { get; set; }

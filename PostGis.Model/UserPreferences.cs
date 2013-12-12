@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostGis.Model
 {
-    public class UserPreferences
+    public class UserPreferences : ITable
     {
         public virtual string K { get; set; }
         public virtual long UserIdid { get; set; }

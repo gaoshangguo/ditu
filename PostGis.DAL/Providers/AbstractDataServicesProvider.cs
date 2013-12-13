@@ -5,6 +5,9 @@ using FluentNHibernate;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Conventions;
+using FluentNHibernate.Conventions.Helpers;
+using FluentNHibernate.Conventions.Instances;
 using FluentNHibernate.Diagnostics;
 using NHibernate;
 using NHibernate.Cfg;
@@ -35,25 +38,20 @@ namespace PostGis.DAL.Providers
 
         public AutoPersistenceModel CreatePersistenceModel()
         {
-            return AutoMap.AssemblyOf<ChangesetTags>(new AutomappingConfiguration());
+            return AutoMap.AssemblyOf<ChangesetTags>(new AutomappingConfiguration()).Conventions.Add(new CascadeConvention()).Conventions.Add(Table.Is(x=>x.TableName.ToLower())).Conventions.Add(new PrimaryKeyConvention());
         }
 
         public ISessionFactory CreateSessionFactory()
         {
-            var database = GetPersistenceConfigurer(CreateDatabase);
-            var persistenceModel = CreatePersistenceModel();
-            return Fluently.Configure().Database(database)
-                .Mappings(m =>
-                    m.AutoMappings.Add(persistenceModel))
-                .BuildSessionFactory();
+            BuildSchema(BuildConfiguration());
+            return Fluently.Configure(BuildConfiguration()).BuildSessionFactory();
         }
 
         private void BuildSchema(Configuration config)
         {
             // this NHibernate tool takes a configuration (with mapping info in)
             // and exports a database schema from it
-            new SchemaExport(config)
-                .Create(false, true);
+            new SchemaExport(config).SetOutputFile(@"C:\abc.txt");
         }
     }
 
@@ -62,6 +60,37 @@ namespace PostGis.DAL.Providers
         public override bool ShouldMap(Type type)
         {
             return type.GetInterfaces().Contains(typeof(ITable));
+        }
+
+        public override bool IsId(Member member)
+        {
+            return member.Name == "Id";
+        }
+    }
+
+    public class CascadeConvention : IReferenceConvention, IHasManyConvention, IHasManyToManyConvention
+    {
+        public void Apply(IManyToOneInstance instance)
+        {
+            instance.Cascade.All();
+        }
+
+        public void Apply(IOneToManyCollectionInstance instance)
+        {
+            instance.Cascade.All();
+        }
+
+        public void Apply(IManyToManyCollectionInstance instance)
+        {
+            instance.Cascade.All();
+        }
+    }
+
+    public class PrimaryKeyConvention : IIdConvention
+    {
+        public void Apply(IIdentityInstance instance)
+        {
+            instance.GeneratedBy.Sequence(instance.EntityType.Name + "_id_seq");
         }
     }
 }

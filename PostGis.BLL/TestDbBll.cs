@@ -14,10 +14,10 @@ namespace PostGis.BLL
         {
             using (var sessionFacory = SessionFactory.OpenSession())
             {
-                Acls acls = new Acls {Address = "abc", K = "123", V = "123", Netmask = "192.168.1.1"};
+                Acls acls = new Acls { Address = "192.168.1.1", K = "123", V = "123", Netmask = "192.168.1.1" };
                 sessionFacory.SaveOrUpdate(acls);
+                sessionFacory.Close();
             }
-
         }
     }
 }

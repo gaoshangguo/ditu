@@ -45,3 +45,13 @@ CREATE TABLE Acls (
     Address inet NOT NULL,
     Netmask inet NOT NULL
 );
+
+ALTER TABLE ONLY acls
+    ADD CONSTRAINT acls_pkey PRIMARY KEY (id);
+
+CREATE SEQUENCE acls_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;

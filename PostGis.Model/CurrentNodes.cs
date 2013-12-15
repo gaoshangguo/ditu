@@ -14,7 +14,7 @@ namespace PostGis.Model
         public virtual long Version { get; set; }
         public virtual bool Visible { get; set; }
         public virtual long Tile { get; set; }
-        public virtual string Timestamp { get; set; }
+        public virtual string Timestamps { get; set; }
         public virtual int Latitude { get; set; }
         public virtual int Longitude { get; set; }
     }

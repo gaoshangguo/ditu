@@ -12,6 +12,6 @@ namespace PostGis.Model
         public virtual string UpdatedAt { get; set; }
         public virtual string Nonce { get; set; }
         public virtual string CreatedAt { get; set; }
-        public virtual int? Timestamp { get; set; }
+        public virtual int? Timestamps { get; set; }
     }
 }

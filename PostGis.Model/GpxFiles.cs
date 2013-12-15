@@ -13,7 +13,7 @@ namespace PostGis.Model
         public virtual Users Users { get; set; }
         public virtual long? Size { get; set; }
         public virtual bool Visible { get; set; }
-        public virtual string Timestamp { get; set; }
+        public virtual string Timestamps { get; set; }
         public virtual string Description { get; set; }
         public virtual string Name { get; set; }
         public virtual string Longitude { get; set; }

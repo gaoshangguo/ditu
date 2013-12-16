@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class ConstString : ITable
+    public class Conststring
     {
         public virtual long Id { get; set; }
         public virtual string T { get; set; }

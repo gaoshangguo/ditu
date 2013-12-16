@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class Sessions : ITable
+    public class Sessions
     {
         public virtual int Id { get; set; }
         public virtual string SessionId { get; set; }

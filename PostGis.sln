@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.BLL", "PostGis.BLL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.Framework", "PostGis.Framework\PostGis.Framework.csproj", "{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostGis.DBMap", "PostGis.DBMap\PostGis.DBMap.csproj", "{93A8CC88-533E-4A94-B447-E262480CD68B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC5A23BC-A7CC-4692-BAC0-61DBBBD9BAEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A8CC88-533E-4A94-B447-E262480CD68B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A8CC88-533E-4A94-B447-E262480CD68B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A8CC88-533E-4A94-B447-E262480CD68B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A8CC88-533E-4A94-B447-E262480CD68B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class GpxFileTags : ITable
+    public class GpxFileTags
     {
         public virtual long Id { get; set; }
         public virtual GpxFiles GpxFiles { get; set; }

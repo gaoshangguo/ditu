@@ -685,7 +685,7 @@ ALTER TABLE conststring ALTER COLUMN id SET DEFAULT NEXTVAL('conststring_id_seq'
 
 CREATE INDEX acls_k_idx ON acls USING btree (k);
 CREATE INDEX changeset_tags_id_idx ON changeset_tags USING btree (id);
-CREATE INDEX changesets_bbox_idx ON changesets USING gist (min_lat, max_lat, min_lon, max_lon);
+--CREATE INDEX changesets_bbox_idx ON changesets USING gist (min_lat, max_lat, min_lon, max_lon);
 CREATE INDEX changesets_closed_at_idx ON changesets USING btree (closed_at);
 CREATE INDEX changesets_created_at_idx ON changesets USING btree (created_at);
 CREATE INDEX changesets_user_id_idx ON changesets USING btree (user_id);

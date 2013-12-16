@@ -40,13 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acls.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Acls.cs" />
     <Compile Include="Changesets.cs" />
     <Compile Include="ChangesetTags.cs" />
     <Compile Include="ClientApplications.cs" />
-    <Compile Include="ConstString.cs" />
+    <Compile Include="Conststring.cs" />
     <Compile Include="Countries.cs" />
     <Compile Include="CurrentNodes.cs" />
     <Compile Include="CurrentNodeTags.cs" />
@@ -56,14 +54,12 @@
     <Compile Include="CurrentWayNodes.cs" />
     <Compile Include="CurrentWays.cs" />
     <Compile Include="CurrentWayTags.cs" />
+    <Compile Include="DiaryComments.cs" />
     <Compile Include="DiaryEntries.cs" />
     <Compile Include="Friends.cs" />
     <Compile Include="GpsPoints.cs" />
     <Compile Include="GpxFiles.cs" />
     <Compile Include="GpxFileTags.cs" />
-    <Compile Include="ITable.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Languages.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Nodes.cs" />
@@ -76,6 +72,7 @@
     <Compile Include="RelationTags.cs" />
     <Compile Include="SchemaMigrations.cs" />
     <Compile Include="Sessions.cs" />
+    <Compile Include="SpatialRefSys.cs" />
     <Compile Include="UserBlocks.cs" />
     <Compile Include="UserPreferences.cs" />
     <Compile Include="UserRoles.cs" />

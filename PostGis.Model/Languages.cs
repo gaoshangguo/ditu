@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class Languages : ITable
+    public class Languages
     {
         public Languages() { }
         public virtual string Code { get; set; }

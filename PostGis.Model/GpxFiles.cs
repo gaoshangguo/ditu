@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class GpxFiles : ITable
+    public class GpxFiles
     {
         public GpxFiles() { }
         public virtual long Id { get; set; }
         public virtual Users Users { get; set; }
         public virtual long? Size { get; set; }
         public virtual bool Visible { get; set; }
-        public virtual string Timestamps { get; set; }
+        public virtual string Timestamp { get; set; }
         public virtual string Description { get; set; }
         public virtual string Name { get; set; }
         public virtual string Longitude { get; set; }

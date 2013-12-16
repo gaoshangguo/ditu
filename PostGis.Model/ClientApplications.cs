@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace PostGis.Model
 {
-    public class ClientApplications : ITable
+    public class ClientApplications
     {
         public ClientApplications() { }
         public virtual int Id { get; set; }

@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +60,46 @@
     <Compile Include="CurrentWayNodes.cs" />
     <Compile Include="CurrentWays.cs" />
     <Compile Include="CurrentWayTags.cs" />
+    <Compile Include="DBMap\AclsMap.cs" />
+    <Compile Include="DBMap\ChangesetsMap.cs" />
+    <Compile Include="DBMap\ChangesetTagsMap.cs" />
+    <Compile Include="DBMap\ClientApplicationsMap.cs" />
+    <Compile Include="DBMap\ConststringMap.cs" />
+    <Compile Include="DBMap\CountriesMap.cs" />
+    <Compile Include="DBMap\CurrentNodesMap.cs" />
+    <Compile Include="DBMap\CurrentNodeTagsMap.cs" />
+    <Compile Include="DBMap\CurrentRelationMembersMap.cs" />
+    <Compile Include="DBMap\CurrentRelationsMap.cs" />
+    <Compile Include="DBMap\CurrentRelationTagsMap.cs" />
+    <Compile Include="DBMap\CurrentWayNodesMap.cs" />
+    <Compile Include="DBMap\CurrentWaysMap.cs" />
+    <Compile Include="DBMap\CurrentWayTagsMap.cs" />
+    <Compile Include="DBMap\DiaryCommentsMap.cs" />
+    <Compile Include="DBMap\DiaryEntriesMap.cs" />
+    <Compile Include="DBMap\FriendsMap.cs" />
+    <Compile Include="DBMap\GpsPointsMap.cs" />
+    <Compile Include="DBMap\GpxFilesMap.cs" />
+    <Compile Include="DBMap\GpxFileTagsMap.cs" />
+    <Compile Include="DBMap\LanguagesMap.cs" />
+    <Compile Include="DBMap\MessagesMap.cs" />
+    <Compile Include="DBMap\NodesMap.cs" />
+    <Compile Include="DBMap\NodeTagsMap.cs" />
+    <Compile Include="DBMap\OauthNoncesMap.cs" />
+    <Compile Include="DBMap\OauthTokensMap.cs" />
+    <Compile Include="DBMap\RelationMembersMap.cs" />
+    <Compile Include="DBMap\RelationsMap.cs" />
+    <Compile Include="DBMap\RelationTagsMap.cs" />
+    <Compile Include="DBMap\SchemaMigrationsMap.cs" />
+    <Compile Include="DBMap\SessionsMap.cs" />
+    <Compile Include="DBMap\SpatialRefSysMap.cs" />
+    <Compile Include="DBMap\UserBlocksMap.cs" />
+    <Compile Include="DBMap\UserPreferencesMap.cs" />
+    <Compile Include="DBMap\UserRolesMap.cs" />
+    <Compile Include="DBMap\UsersMap.cs" />
+    <Compile Include="DBMap\UserTokensMap.cs" />
+    <Compile Include="DBMap\WayNodesMap.cs" />
+    <Compile Include="DBMap\WaysMap.cs" />
+    <Compile Include="DBMap\WayTagsMap.cs" />
     <Compile Include="DiaryComments.cs" />
     <Compile Include="DiaryEntries.cs" />
     <Compile Include="Friends.cs" />
@@ -81,6 +127,9 @@
     <Compile Include="WayNodes.cs" />
     <Compile Include="Ways.cs" />
     <Compile Include="WayTags.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

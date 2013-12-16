@@ -1,3 +1,8 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
+
 namespace PostGis.Model
 {
     public class Acls

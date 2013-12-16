@@ -1,13 +1,23 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace PostGis.Model
 {
     public class Ways
     {
-        public Ways() { }
+        public Ways()
+        {
+            WayNodes = new List<WayNodes>();
+            WayTags = new List<WayTags>();
+        }
         public virtual long Id { get; set; }
         public virtual long Version { get; set; }
         public virtual Changesets Changesets { get; set; }
         public virtual bool Visible { get; set; }
         public virtual string Timestamp { get; set; }
+        public virtual IList<WayNodes> WayNodes { get; set; }
+        public virtual IList<WayTags> WayTags { get; set; }
         #region NHibernate Composite Key Requirements
         public override bool Equals(object obj)
         {

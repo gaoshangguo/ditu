@@ -1,16 +1,23 @@
 using System;
-
+using System.Text;
+using System.Collections.Generic;
 
 namespace PostGis.Model
 {
     public class Relations
     {
-        public Relations() { }
+        public Relations()
+        {
+            RelationMembers = new List<RelationMembers>();
+            RelationTags = new List<RelationTags>();
+        }
         public virtual long Id { get; set; }
         public virtual long Version { get; set; }
         public virtual Changesets Changesets { get; set; }
         public virtual bool Visible { get; set; }
         public virtual string Timestamp { get; set; }
+        public virtual IList<RelationMembers> RelationMembers { get; set; }
+        public virtual IList<RelationTags> RelationTags { get; set; }
         #region NHibernate Composite Key Requirements
         public override bool Equals(object obj)
         {

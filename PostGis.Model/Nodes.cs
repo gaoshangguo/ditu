@@ -1,8 +1,15 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace PostGis.Model
 {
     public class Nodes
     {
-        public Nodes() { }
+        public Nodes()
+        {
+            NodeTags = new List<NodeTags>();
+        }
         public virtual long Id { get; set; }
         public virtual long Version { get; set; }
         public virtual Changesets Changesets { get; set; }
@@ -11,6 +18,7 @@ namespace PostGis.Model
         public virtual string Timestamp { get; set; }
         public virtual int Latitude { get; set; }
         public virtual int Longitude { get; set; }
+        public virtual IList<NodeTags> NodeTags { get; set; }
         #region NHibernate Composite Key Requirements
         public override bool Equals(object obj)
         {

@@ -1,8 +1,15 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace PostGis.Model
 {
     public class ClientApplications
     {
-        public ClientApplications() { }
+        public ClientApplications()
+        {
+            OauthTokens = new List<OauthTokens>();
+        }
         public virtual int Id { get; set; }
         public virtual Users Users { get; set; }
         public virtual bool AllowWriteGpx { get; set; }
@@ -19,5 +26,6 @@ namespace PostGis.Model
         public virtual string SupportUrl { get; set; }
         public virtual string CallbackUrl { get; set; }
         public virtual string Secret { get; set; }
+        public virtual IList<OauthTokens> OauthTokens { get; set; }
     }
 }

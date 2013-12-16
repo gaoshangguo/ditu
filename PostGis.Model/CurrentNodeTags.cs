@@ -1,3 +1,7 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
+
 namespace PostGis.Model
 {
     public class CurrentNodeTags
@@ -12,7 +16,8 @@ namespace PostGis.Model
             if (obj == null) return false;
             var t = obj as CurrentNodeTags;
             if (t == null) return false;
-            if (K == t.K && Id == t.Id)
+            if (K == t.K
+             && Id == t.Id)
                 return true;
 
             return false;

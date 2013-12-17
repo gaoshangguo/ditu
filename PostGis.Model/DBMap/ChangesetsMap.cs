@@ -24,12 +24,12 @@ namespace PostGis.Model.DBMap
             Property(x => x.NumChanges, map => { map.Column("num_changes"); map.NotNullable(true); });
             ManyToOne(x => x.Users, map => map.Column("user_id"));
             Bag(x => x.ChangesetTags, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.CurrentNodes, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.CurrentRelations, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.CurrentWays, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.Nodes, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.Relations, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-            Bag(x => x.Ways, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.CurrentNodes, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.CurrentRelations, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.CurrentWays, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.Nodes, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.Relations, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+            Bag(x => x.Ways, colmap => { colmap.Key(x => x.Column("changeset_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
         }
     }
 }

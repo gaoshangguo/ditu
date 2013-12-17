@@ -6,12 +6,10 @@ using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Mapping.ByCode;
 using PostGis.Model;
 
-
-namespace PostGis.Model.DBMap {
-    
-    
-    public class CurrentWaysMap : ClassMapping<CurrentWays> {
-        
+namespace PostGis.Model.DBMap
+{
+    public class CurrentWaysMap : ClassMapping<CurrentWays>
+    {
         public CurrentWaysMap() {
 			Table("current_ways");
 			Schema("public");
@@ -20,10 +18,9 @@ namespace PostGis.Model.DBMap {
 			Property(x => x.Version, map => map.NotNullable(true));
 			Property(x => x.Visible, map => map.NotNullable(true));
 			Property(x => x.Timestamp, map => map.NotNullable(true));
-			ManyToOne(x => x., map => { map.Column("changeset_id"); map.Cascade(Cascade.None); });
-
-			Bag(x => x.CurrentWayNodes, colmap =>  { colmap.Key(x => x.Column("")); colmap.Inverse(true); }, map => { map.OneToMany(); });
-			Bag(x => x.CurrentWayTags, colmap =>  { colmap.Key(x => x.Column("")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+			ManyToOne(x => x.Changesets, map => { map.Column("changeset_id"); map.Cascade(Cascade.None); });
+            Bag(x => x.CurrentWayNodes, colmap => { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+			Bag(x => x.CurrentWayTags, colmap =>  { colmap.Key(x => x.Column("id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
         }
     }
 }

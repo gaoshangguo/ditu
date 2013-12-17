@@ -31,9 +31,8 @@ namespace PostGis.Model.DBMap {
 			Property(x => x.SupportUrl, map => map.Column("support_url"));
 			Property(x => x.CallbackUrl, map => map.Column("callback_url"));
 			Property(x => x.Secret);
-			ManyToOne(x => x.UserId, map => map.Columns(new Action<IColumnMapper>[] { x => x.Name("user_id"), x => x.Name("user_id") }));
-			ManyToOne(x => x.UserId, map => map.Columns(new Action<IColumnMapper>[] { x => x.Name("user_id"), x => x.Name("user_id") }));
-			Bag(x => x.OauthTokens, colmap =>  { colmap.Key(x => x.Column("")); colmap.Inverse(true); }, map => { map.OneToMany(); });
+			ManyToOne(x => x.Users, map => map.Columns(new Action<IColumnMapper>[] { x => x.Name("user_id"), x => x.Name("user_id") }));
+            Bag(x => x.OauthTokens, colmap => { colmap.Key(x => x.Column("client_application_id")); colmap.Inverse(true); }, map => { map.OneToMany(); });
         }
     }
 }
